@@ -620,6 +620,45 @@ function initScrollAnimations() {
   })
 }
 
+// ---- VANTA.JS 3D MESH BACKGROUND ----
+let vantaEffect = null
+
+function initVantaBg() {
+  if (typeof VANTA === 'undefined') {
+    // Retry if scripts haven't loaded yet
+    setTimeout(initVantaBg, 200)
+    return
+  }
+
+  const isDark = document.documentElement.getAttribute('data-theme') !== 'light'
+
+  vantaEffect = VANTA.NET({
+    el: '#vantaBg',
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200,
+    minWidth: 200,
+    scale: 1.0,
+    scaleMobile: 1.0,
+    color: isDark ? 0x4fd1c5 : 0x0d9488,
+    backgroundColor: isDark ? 0x06060b : 0xf8f9fc,
+    points: 8,
+    maxDistance: 22,
+    spacing: 18,
+    showDots: true,
+  })
+}
+
+function updateVantaTheme() {
+  if (!vantaEffect) return
+  const isDark = document.documentElement.getAttribute('data-theme') !== 'light'
+  vantaEffect.setOptions({
+    color: isDark ? 0x4fd1c5 : 0x0d9488,
+    backgroundColor: isDark ? 0x06060b : 0xf8f9fc,
+  })
+}
+
 // ---- PARALLAX ON SCROLL ----
 function initParallax() {
   const hero = document.querySelector('.hero__content')
@@ -802,6 +841,7 @@ function initThemeToggle() {
     const next = current === 'light' ? 'dark' : 'light'
     document.documentElement.setAttribute('data-theme', next)
     localStorage.setItem('exxede-theme', next)
+    updateVantaTheme()
   })
 }
 
@@ -1032,6 +1072,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initThemeToggle()
   initLangToggle()
   new ShootingStars(document.getElementById('starsCanvas'))
+  initVantaBg()
   initLetterNav()
   initTiltCards()
   initMagneticButtons()

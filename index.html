@@ -13,6 +13,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles/main.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js" defer></script>
 </head>
 <body>
   <!-- Shooting Stars Canvas -->
@@ -49,11 +51,9 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
-    <div class="hero__bg">
-      <div class="hero__grid"></div>
+    <div class="hero__bg" id="vantaBg">
       <div class="hero__glow hero__glow--1"></div>
       <div class="hero__glow hero__glow--2"></div>
-      <div class="hero__orb"></div>
     </div>
     <div class="container hero__content">
       <div class="hero__badge anim-pop">
