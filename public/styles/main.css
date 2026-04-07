@@ -283,19 +283,47 @@ img { max-width: 100%; height: auto; display: block; }
 
 .btn--primary:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow:
-    0 0 20px var(--accent-glow),
-    0 8px 30px rgba(0, 0, 0, 0.3);
+  animation: glow-pulse-btn 2s ease-in-out infinite;
+}
+
+.btn--primary:hover::before {
+  animation-duration: 1.5s;
 }
 
 .btn--primary:hover::after {
   background: color-mix(in srgb, var(--bg-primary) 85%, var(--accent));
 }
 
+@keyframes glow-pulse-btn {
+  0%, 100% { box-shadow: 0 0 15px var(--accent-glow), 0 8px 30px rgba(0, 0, 0, 0.3); }
+  50% { box-shadow: 0 0 35px var(--accent-glow-strong), 0 12px 40px rgba(0, 0, 0, 0.4); }
+}
+
 /* Shimmer sweep on hover */
 .btn--primary span {
   position: relative;
   z-index: 1;
+  overflow: hidden;
+}
+
+.btn--primary span::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(79, 209, 197, 0.15) 50%,
+    transparent 60%
+  );
+  transform: translateX(-150%);
+  transition: none;
+  pointer-events: none;
+}
+
+.btn--primary:hover span::before {
+  transform: translateX(250%);
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn--primary svg {
