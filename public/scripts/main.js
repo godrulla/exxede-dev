@@ -712,16 +712,60 @@ function initSectionZoom() {
 
 // ---- CONTACT FORM ----
 function initContactForm() {
-  document.getElementById('contactForm').addEventListener('submit', (e) => {
+  const form = document.getElementById('contactForm')
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault()
-    const btn = e.target.querySelector('button[type="submit"]')
+    const btn = form.querySelector('button[type="submit"]')
     const original = btn.innerHTML
+
+    const name = form.querySelector('#name').value
+    const email = form.querySelector('#email').value
+    const project = form.querySelector('#project').value || 'Not specified'
+    const budget = form.querySelector('#budget').value || 'Not specified'
+    const message = form.querySelector('#message').value
+
+    // Try Formspree first (if endpoint configured)
+    const FORMSPREE_ID = 'xpwzgkvq'
+    let sent = false
+
+    btn.innerHTML = '<span>Sending...</span>'
+    btn.disabled = true
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          project_type: project,
+          budget,
+          message,
+          _replyto: email,
+          _subject: `Exxede.dev — New inquiry from ${name}`,
+        }),
+      })
+      if (res.ok) sent = true
+    } catch (_) {}
+
+    // Fallback: open mailto
+    if (!sent) {
+      const subject = encodeURIComponent(`Exxede.dev Inquiry from ${name}`)
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nProject Type: ${project}\nBudget: ${budget}\n\nMessage:\n${message}`
+      )
+      window.open(`mailto:godrulla@gmail.com?subject=${subject}&body=${body}`, '_self')
+    }
+
     btn.innerHTML = '<span>Message Sent!</span>'
     btn.style.background = 'linear-gradient(135deg, #28c840, #20a535)'
+    btn.disabled = false
+
     setTimeout(() => {
       btn.innerHTML = original
       btn.style.background = ''
-      e.target.reset()
+      form.reset()
     }, 3000)
   })
 }
