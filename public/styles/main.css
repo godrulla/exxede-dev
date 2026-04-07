@@ -549,7 +549,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(3.2rem, 7.5vw, 6rem);
+  font-size: clamp(2.2rem, 5.25vw, 4.2rem);
   font-weight: 300;
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -2185,7 +2185,7 @@ a.portfolio-card:hover h3 {
 }
 
 @media (max-width: 480px) {
-  .hero__title { font-size: 2.5rem; }
+  .hero__title { font-size: 1.75rem; }
   .hero__actions { flex-direction: column; }
   .hero__actions .btn { width: 100%; }
   .hero__stats { flex-direction: column; gap: 1rem; }
