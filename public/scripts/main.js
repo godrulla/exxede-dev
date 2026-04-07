@@ -202,7 +202,12 @@ function initRotatingText() {
   const container = document.getElementById('rotatingText')
   if (!container) return
 
-  const words = ['Apps', 'Platforms', 'Products', 'Experiences', 'The Future']
+  const getWords = () => translations && translations[currentLang] ? translations[currentLang]['hero.words'] : ['Apps', 'Platforms', 'Products', 'Experiences', 'The Future']
+  let words = getWords()
+
+  // Update words when language changes
+  const origApply = window._updateTypewriterWords
+  window._updateTypewriterWords = () => { words = getWords() }
   let wordIdx = 0
   let charIdx = 0
   let isDeleting = false
@@ -742,8 +747,246 @@ function initActiveNav() {
   })
 }
 
+// ---- THEME TOGGLE ----
+function initThemeToggle() {
+  const btn = document.getElementById('themeToggle')
+  const saved = localStorage.getItem('exxede-theme')
+  if (saved) document.documentElement.setAttribute('data-theme', saved)
+
+  btn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme')
+    const next = current === 'light' ? 'dark' : 'light'
+    document.documentElement.setAttribute('data-theme', next)
+    localStorage.setItem('exxede-theme', next)
+  })
+}
+
+// ---- LANGUAGE TOGGLE ----
+let currentLang = localStorage.getItem('exxede-lang') || 'en'
+let translations = null
+
+async function loadTranslations() {
+  const mod = await import('./i18n.js')
+  translations = mod.default
+}
+
+function applyTranslations(lang) {
+  if (!translations) return
+  const t = translations[lang]
+  if (!t) return
+
+  // Nav links (re-init letter-by-letter after text change)
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n
+    if (t[key]) el.textContent = t[key]
+  })
+
+  // Hero
+  const badge = document.querySelector('.hero__badge')
+  if (badge) {
+    const dot = badge.querySelector('.hero__badge-dot')
+    badge.textContent = ''
+    if (dot) badge.appendChild(dot)
+    badge.appendChild(document.createTextNode(' ' + t['hero.badge']))
+  }
+
+  const titlePre = document.querySelector('.hero__title')
+  if (titlePre) {
+    const rotating = document.getElementById('rotatingText')
+    const br = titlePre.querySelector('br')
+    const accent = document.getElementById('heroAccent')
+    titlePre.childNodes.forEach(n => {
+      if (n.nodeType === 3 && n.textContent.trim()) n.textContent = t['hero.title.pre'] + ' '
+    })
+    if (accent) accent.textContent = t['hero.accent']
+  }
+
+  const subtitle = document.querySelector('.hero__subtitle')
+  if (subtitle) subtitle.textContent = t['hero.subtitle']
+
+  // Hero buttons
+  const ctaPrimary = document.querySelector('.hero__actions .btn--primary span')
+  const ctaSecondary = document.querySelector('.hero__actions .btn--ghost span')
+  if (ctaPrimary) ctaPrimary.textContent = t['hero.cta.primary']
+  if (ctaSecondary) ctaSecondary.textContent = t['hero.cta.secondary']
+
+  // Stats
+  const statLabels = document.querySelectorAll('.stat__label')
+  ;['hero.stat.1', 'hero.stat.2', 'hero.stat.3', 'hero.stat.4'].forEach((key, i) => {
+    if (statLabels[i] && t[key]) statLabels[i].textContent = t[key]
+  })
+
+  // Section headers
+  const sectionMap = [
+    ['#services', 'services'],
+    ['#portfolio', 'portfolio'],
+    ['#process', 'process'],
+    ['#tech', 'tech'],
+    ['#caribbean', 'caribbean'],
+    ['#faq', 'faq'],
+  ]
+  sectionMap.forEach(([sel, prefix]) => {
+    const section = document.querySelector(sel)
+    if (!section) return
+    const tag = section.querySelector('.section__tag')
+    const title = section.querySelector('.section__title')
+    const desc = section.querySelector('.section__desc')
+    if (tag && t[prefix + '.tag']) tag.textContent = t[prefix + '.tag']
+    if (title && t[prefix + '.title']) title.innerHTML = t[prefix + '.title']
+    if (desc && t[prefix + '.desc']) desc.textContent = t[prefix + '.desc']
+  })
+
+  // Service card titles and descriptions
+  const serviceKeys = ['web', 'pwa', 'api', 'ai', 'ecom', 'devops']
+  document.querySelectorAll('.service-card').forEach((card, i) => {
+    const key = serviceKeys[i]
+    if (!key) return
+    const h3 = card.querySelector('h3')
+    const p = card.querySelector('p')
+    const cta = card.querySelector('.service-card__cta')
+    if (h3 && t['services.' + key + '.title']) h3.textContent = t['services.' + key + '.title']
+    if (p && t['services.' + key + '.desc']) p.textContent = t['services.' + key + '.desc']
+    if (cta) cta.textContent = t['services.learn']
+  })
+
+  // Process steps
+  for (let i = 1; i <= 4; i++) {
+    const step = document.querySelectorAll('.process-step')[i - 1]
+    if (!step) continue
+    const h3 = step.querySelector('h3')
+    const p = step.querySelector('.process-step__content p')
+    if (h3 && t['process.' + i + '.title']) h3.textContent = t['process.' + i + '.title']
+    if (p && t['process.' + i + '.desc']) p.textContent = t['process.' + i + '.desc']
+  }
+
+  // Tech category headers
+  const techHeaders = ['tech.frontend', 'tech.backend', 'tech.cloud', 'tech.ai']
+  document.querySelectorAll('.tech-category h4').forEach((h4, i) => {
+    if (t[techHeaders[i]]) h4.textContent = t[techHeaders[i]]
+  })
+
+  // About
+  const aboutTag = document.querySelector('#about .section__tag')
+  const aboutTitle = document.querySelector('#about .section__title')
+  if (aboutTag && t['about.tag']) aboutTag.textContent = t['about.tag']
+  if (aboutTitle && t['about.title']) aboutTitle.innerHTML = t['about.title']
+  const aboutPs = document.querySelectorAll('#about .about-content > p')
+  if (aboutPs[0] && t['about.p1']) aboutPs[0].textContent = t['about.p1']
+  if (aboutPs[1] && t['about.p2']) aboutPs[1].textContent = t['about.p2']
+  const aboutHighlights = document.querySelectorAll('.about-highlight span')
+  ;['about.loc', 'about.year', 'about.clients', 'about.approach'].forEach((key, i) => {
+    if (aboutHighlights[i] && t[key]) aboutHighlights[i].textContent = t[key]
+  })
+
+  // Caribbean advantages
+  const advKeys = ['tz', 'rate', 'market', 'lang']
+  document.querySelectorAll('.advantage-card').forEach((card, i) => {
+    const key = advKeys[i]
+    if (!key) return
+    const h3 = card.querySelector('h3')
+    const p = card.querySelector('p')
+    if (h3 && t['caribbean.' + key + '.title']) h3.textContent = t['caribbean.' + key + '.title']
+    if (p && t['caribbean.' + key + '.desc']) p.textContent = t['caribbean.' + key + '.desc']
+  })
+
+  // FAQ
+  document.querySelectorAll('.faq-item').forEach((item, i) => {
+    const idx = i + 1
+    const summary = item.querySelector('summary')
+    const p = item.querySelector('p')
+    if (summary && t['faq.' + idx + '.q']) summary.textContent = t['faq.' + idx + '.q']
+    if (p && t['faq.' + idx + '.a']) p.textContent = t['faq.' + idx + '.a']
+  })
+
+  // Contact
+  const contactTag = document.querySelector('#contact .section__tag')
+  const contactTitle = document.querySelector('#contact .section__title')
+  const contactDesc = document.querySelector('.contact-info > p')
+  if (contactTag && t['contact.tag']) contactTag.textContent = t['contact.tag']
+  if (contactTitle && t['contact.title']) contactTitle.innerHTML = t['contact.title']
+  if (contactDesc && t['contact.desc']) contactDesc.textContent = t['contact.desc']
+
+  // Form labels and placeholders
+  const nameLabel = document.querySelector('label[for="name"]')
+  const nameInput = document.getElementById('name')
+  const emailLabel = document.querySelector('label[for="email"]')
+  const emailInput = document.getElementById('email')
+  const typeLabel = document.querySelector('label[for="project"]')
+  const budgetLabel = document.querySelector('label[for="budget"]')
+  const msgLabel = document.querySelector('label[for="message"]')
+  const msgInput = document.getElementById('message')
+  const submitBtn = document.querySelector('#contactForm .btn--primary span')
+
+  if (nameLabel) nameLabel.textContent = t['contact.name']
+  if (nameInput) nameInput.placeholder = t['contact.name.ph']
+  if (emailLabel) emailLabel.textContent = t['contact.email']
+  if (emailInput) emailInput.placeholder = t['contact.email.ph']
+  if (typeLabel) typeLabel.textContent = t['contact.type']
+  if (budgetLabel) budgetLabel.textContent = t['contact.budget']
+  if (msgLabel) msgLabel.textContent = t['contact.message']
+  if (msgInput) msgInput.placeholder = t['contact.message.ph']
+  if (submitBtn) submitBtn.textContent = t['contact.submit']
+
+  // Trust items
+  document.querySelectorAll('.trust-item span').forEach((el, i) => {
+    const key = 'contact.trust.' + (i + 1)
+    if (t[key]) el.textContent = t[key]
+  })
+
+  // Portfolio CTA card
+  const ctaCard = document.querySelector('.portfolio-card--cta')
+  if (ctaCard) {
+    const h3 = ctaCard.querySelector('h3')
+    const p = ctaCard.querySelector('p')
+    const btn = ctaCard.querySelector('.btn span, .btn')
+    if (h3 && t['portfolio.cta.title']) h3.textContent = t['portfolio.cta.title']
+    if (p && t['portfolio.cta.desc']) p.textContent = t['portfolio.cta.desc']
+    if (btn && t['portfolio.cta.btn']) btn.textContent = t['portfolio.cta.btn']
+  }
+
+  // Footer
+  const footerCols = document.querySelectorAll('.footer__col h5')
+  if (footerCols[0] && t['footer.services']) footerCols[0].textContent = t['footer.services']
+  if (footerCols[1] && t['footer.company']) footerCols[1].textContent = t['footer.company']
+  if (footerCols[2] && t['footer.connect']) footerCols[2].textContent = t['footer.connect']
+
+  const footerBrand = document.querySelector('.footer__brand p')
+  if (footerBrand && t['footer.tagline']) footerBrand.innerHTML = t['footer.tagline']
+
+  const copyright = document.querySelector('.footer__bottom p:first-child')
+  if (copyright && t['footer.copyright']) copyright.textContent = t['footer.copyright']
+
+  // Re-init letter nav with new text
+  initLetterNav()
+
+  // Update typewriter words
+  if (window._updateTypewriterWords) window._updateTypewriterWords()
+
+  document.documentElement.setAttribute('lang', lang)
+}
+
+function initLangToggle() {
+  const btn = document.getElementById('langToggle')
+  const opts = btn.querySelectorAll('.lang-opt')
+
+  // Apply saved lang
+  if (currentLang === 'es') {
+    opts.forEach(o => o.classList.toggle('lang-opt--active', o.dataset.lang === 'es'))
+  }
+
+  btn.addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'es' : 'en'
+    localStorage.setItem('exxede-lang', currentLang)
+    opts.forEach(o => o.classList.toggle('lang-opt--active', o.dataset.lang === currentLang))
+    applyTranslations(currentLang)
+  })
+}
+
 // ---- INIT ----
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadTranslations()
+  initThemeToggle()
+  initLangToggle()
   new ShootingStars(document.getElementById('starsCanvas'))
   initLetterNav()
   initTiltCards()
@@ -760,4 +1003,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProjectPreviews()
   initContactForm()
   initActiveNav()
+
+  // Apply saved language
+  if (currentLang !== 'en') applyTranslations(currentLang)
 })
