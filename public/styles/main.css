@@ -1036,6 +1036,7 @@ a.portfolio-card:hover h3 {
 .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
 .tech-tag {
+  position: relative;
   padding: 0.5rem 1rem;
   border-radius: 100px;
   border: 1px solid var(--border);
@@ -1044,7 +1045,9 @@ a.portfolio-card:hover h3 {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   transition: all 0.3s var(--ease);
-  cursor: default;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .tech-tag:hover {
@@ -1053,6 +1056,58 @@ a.portfolio-card:hover h3 {
   background: var(--accent-glow);
   transform: translateY(-2px);
   box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+/* Tooltip card */
+.tech-tag[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  width: 240px;
+  padding: 0.75rem 1rem;
+  border-radius: 0.625rem;
+  background: rgba(14, 14, 22, 0.95);
+  border: 1px solid var(--border-hover);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(79, 209, 197, 0.04);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  white-space: normal;
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0.25s var(--ease);
+  z-index: 50;
+}
+
+/* Arrow */
+.tech-tag[data-tip]::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(14, 14, 22, 0.95);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s var(--ease), visibility 0.25s var(--ease);
+  z-index: 51;
+}
+
+.tech-tag[data-tip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tech-tag[data-tip]:hover::before {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* ============================================
