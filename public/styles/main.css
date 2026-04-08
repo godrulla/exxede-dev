@@ -90,11 +90,11 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 [data-theme="light"] .nav {
-  background: rgba(248, 249, 252, 0.8);
+  background: rgba(248, 249, 252, 0.5);
 }
 
 [data-theme="light"] .nav--scrolled {
-  background: rgba(248, 249, 252, 0.95);
+  background: rgba(248, 249, 252, 0.75);
 }
 
 [data-theme="light"] .hero__glow--1 {
@@ -276,7 +276,7 @@ img { max-width: 100%; height: auto; display: block; }
   position: absolute;
   inset: 2px;
   border-radius: calc(0.75rem - 2px);
-  background: var(--bg-primary);
+  background: rgba(6, 6, 11, 0.85);
   z-index: -1;
   transition: background 0.3s var(--ease);
 }
@@ -291,7 +291,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .btn--primary:hover::after {
-  background: color-mix(in srgb, var(--bg-primary) 85%, var(--accent));
+  background: rgba(6, 6, 11, 0.75);
 }
 
 @keyframes glow-pulse-btn {
@@ -360,7 +360,8 @@ img { max-width: 100%; height: auto; display: block; }
 .btn--ghost:hover {
   border-color: var(--accent);
   color: var(--accent);
-  box-shadow: 0 0 25px var(--accent-glow), inset 0 0 20px var(--accent-glow);
+  background: rgba(79, 209, 197, 0.06);
+  box-shadow: 0 0 25px var(--accent-glow), inset 0 0 15px var(--accent-glow);
   transform: translateY(-2px);
 }
 
@@ -396,11 +397,11 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 [data-theme="light"] .btn--primary::after {
-  background: var(--bg-primary);
+  background: rgba(248, 249, 252, 0.85);
 }
 
 [data-theme="light"] .btn--primary:hover::after {
-  background: color-mix(in srgb, var(--bg-primary) 90%, var(--accent));
+  background: rgba(248, 249, 252, 0.75);
 }
 
 [data-theme="light"] .btn--ghost:hover {
@@ -417,7 +418,7 @@ img { max-width: 100%; height: auto; display: block; }
   right: 0;
   z-index: 100;
   padding: 1.25rem 0;
-  background: rgba(6, 6, 11, 0.6);
+  background: rgba(6, 6, 11, 0.4);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid transparent;
@@ -427,7 +428,7 @@ img { max-width: 100%; height: auto; display: block; }
 .nav--scrolled {
   border-bottom-color: var(--border);
   padding: 0.75rem 0;
-  background: rgba(6, 6, 11, 0.9);
+  background: rgba(6, 6, 11, 0.7);
 }
 
 .nav__inner {
