@@ -1094,6 +1094,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   initContactForm()
   initActiveNav()
 
+  // Dynamic copyright year
+  const yearEl = document.getElementById('footerYear')
+  if (yearEl) yearEl.textContent = new Date().getFullYear()
+
   // Apply saved language
   if (currentLang !== 'en') applyTranslations(currentLang)
 })

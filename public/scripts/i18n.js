@@ -27,7 +27,7 @@ const translations = {
     // Services
     'services.tag': 'What We Ship',
     'services.title': 'Full-Stack Development Services',
-    'services.desc': 'From SaaS platforms and booking systems to AI-powered tools and e-commerce stores. Lean team, senior execution, global reach.',
+    'services.desc': 'Six core services, one team, zero handoffs. We own the full lifecycle from design to deployment.',
     'services.learn': 'Learn More',
     'services.web.title': 'Web Applications',
     'services.web.desc': 'Custom SaaS platforms, dashboards, and internal tools built with React, Next.js, and modern frameworks. Responsive, fast, and scalable.',
@@ -45,7 +45,7 @@ const translations = {
     // Portfolio
     'portfolio.tag': 'Our Work',
     'portfolio.title': 'Projects We\'ve Built',
-    'portfolio.desc': 'Real products, real results. Here\'s a look at what we\'ve shipped.',
+    'portfolio.desc': 'Shipped code. Live products. Real revenue. Click any project to preview it live.',
     'portfolio.cta.title': 'Your Project?',
     'portfolio.cta.desc': 'We\'re always looking for the next challenge. Let\'s build something amazing together.',
     'portfolio.cta.btn': 'Let\'s Build This',
@@ -158,8 +158,11 @@ const translations = {
     'footer.lg.privacy': 'Privacy Policy',
     'footer.lg.terms': 'Terms of Service',
     'footer.lg.cookies': 'Cookie Policy',
-    'footer.copyright': '© 2024 Exxede.dev. All Rights Reserved.',
+    'footer.cx.whatsapp': 'WhatsApp',
+    'footer.copyright': '© 2026 Exxede.dev. All Rights Reserved.',
     'footer.location': 'Punta Cana, Dominican Republic',
+
+    'hero.badge': 'AI-Powered Web App Studio — Punta Cana, DR',
 
     // Preview
     'preview.open': 'Open Full Site',
@@ -193,7 +196,7 @@ const translations = {
 
     'services.tag': 'Lo Que Creamos',
     'services.title': 'Servicios de Desarrollo Full-Stack',
-    'services.desc': 'Desde plataformas SaaS y sistemas de reservas hasta herramientas con IA y tiendas en línea. Equipo ágil, ejecución senior, alcance global.',
+    'services.desc': 'Seis servicios principales, un solo equipo, cero intermediarios. Somos dueños del ciclo completo desde el diseño hasta el despliegue.',
     'services.learn': 'Más Info',
     'services.web.title': 'Aplicaciones Web',
     'services.web.desc': 'Plataformas SaaS personalizadas, dashboards y herramientas internas construidas con React, Next.js y frameworks modernos. Responsivas, rápidas y escalables.',
@@ -210,7 +213,7 @@ const translations = {
 
     'portfolio.tag': 'Nuestro Trabajo',
     'portfolio.title': 'Proyectos Que Hemos Construido',
-    'portfolio.desc': 'Productos reales, resultados reales. Un vistazo a lo que hemos entregado.',
+    'portfolio.desc': 'Código entregado. Productos en vivo. Ingresos reales. Haz clic en cualquier proyecto para verlo en vivo.',
     'portfolio.cta.title': '¿Tu Proyecto?',
     'portfolio.cta.desc': 'Siempre buscamos el próximo desafío. Construyamos algo increíble juntos.',
     'portfolio.cta.btn': 'Construyámoslo',
@@ -316,8 +319,11 @@ const translations = {
     'footer.lg.privacy': 'Política de Privacidad',
     'footer.lg.terms': 'Términos de Servicio',
     'footer.lg.cookies': 'Política de Cookies',
-    'footer.copyright': '© 2024 Exxede.dev. Todos los Derechos Reservados.',
+    'footer.cx.whatsapp': 'WhatsApp',
+    'footer.copyright': '© 2026 Exxede.dev. Todos los Derechos Reservados.',
     'footer.location': 'Punta Cana, República Dominicana',
+
+    'hero.badge': 'Estudio Web con IA — Punta Cana, RD',
 
     'preview.open': 'Abrir Sitio Completo',
     'preview.loading': 'Cargando vista previa...',
