@@ -1791,7 +1791,7 @@ a.portfolio-card:hover h3 {
 
 .footer__cols {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
 }
 
@@ -1828,6 +1828,20 @@ a.portfolio-card:hover h3 {
 
 .footer__bottom a { color: var(--text-secondary); }
 .footer__bottom a:hover { color: var(--accent); }
+
+.footer__family { margin-top: 0.25rem; }
+
+.footer__location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.footer__location svg { color: var(--accent); flex-shrink: 0; }
 
 /* ============================================
    SERVICE MODAL
@@ -2289,7 +2303,7 @@ a.portfolio-card:hover h3 {
     gap: 2rem;
   }
 
-  .footer__cols { grid-template-columns: repeat(3, 1fr); }
+  .footer__cols { grid-template-columns: repeat(2, 1fr); }
 
   .form-row { grid-template-columns: 1fr; }
 

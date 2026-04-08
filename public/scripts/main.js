@@ -859,10 +859,15 @@ function applyTranslations(lang) {
   const t = translations[lang]
   if (!t) return
 
-  // Nav links (re-init letter-by-letter after text change)
+  // All data-i18n elements (use innerHTML for keys containing HTML tags)
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n
-    if (t[key]) el.textContent = t[key]
+    if (!t[key]) return
+    if (t[key].includes('<')) {
+      el.innerHTML = t[key]
+    } else {
+      el.textContent = t[key]
+    }
   })
 
   // Hero

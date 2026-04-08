@@ -4,8 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Exxede.dev — Web App Development Studio | Punta Cana, DR</title>
-  <meta name="description" content="We build high-performance web applications that scale. AI-powered SaaS, PWAs, and custom platforms. Based in Punta Cana, shipped worldwide." />
-  <meta name="keywords" content="web app development, custom software, SaaS development, AI integration, Caribbean tech, Punta Cana developers, React, Next.js, full-stack" />
+  <meta name="description" content="Custom web app development studio in Punta Cana, DR. We build AI-powered SaaS platforms, PWAs, and full-stack applications. React, Next.js, TypeScript. Shipped worldwide." />
+  <meta name="keywords" content="web app development, custom software, SaaS development, AI integration, Caribbean tech, Punta Cana developers, React, Next.js, full-stack, Dominican Republic, nearshore development" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Exxede.dev — Web App Development Studio" />
+  <meta property="og:description" content="Custom web app development from Punta Cana, DR. AI-powered SaaS, PWAs, and full-stack platforms. Shipped worldwide." />
+  <meta property="og:url" content="https://exxede-dev.vercel.app" />
+  <meta property="og:image" content="https://exxede-dev.vercel.app/images/logo.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_DO" />
+  <meta property="og:site_name" content="Exxede.dev" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Exxede.dev — Web App Development Studio" />
+  <meta name="twitter:description" content="Custom web app development from Punta Cana, DR. AI-powered SaaS, PWAs, and full-stack platforms." />
+  <meta name="twitter:image" content="https://exxede-dev.vercel.app/images/logo.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://exxede-dev.vercel.app" />
+
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png" />
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
@@ -15,6 +35,49 @@
   <link rel="stylesheet" href="/styles/main.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js" defer></script>
+
+  <!-- Structured Data: LocalBusiness + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Exxede.dev",
+    "description": "Web app development studio specializing in AI-powered SaaS platforms, PWAs, and full-stack applications.",
+    "url": "https://exxede-dev.vercel.app",
+    "logo": "https://exxede-dev.vercel.app/images/logo.png",
+    "email": "godrulla@gmail.com",
+    "telephone": "+18095169523",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Punta Cana",
+      "addressCountry": "DO"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Armando Diaz Silverio"
+    },
+    "areaServed": "Worldwide",
+    "knowsLanguage": ["en", "es"],
+    "priceRange": "$$",
+    "serviceType": ["Web Application Development", "AI Integration", "E-Commerce Development", "Progressive Web Apps", "API Development", "DevOps"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "How long does it take to build a web application?", "acceptedAnswer": {"@type": "Answer", "text": "A focused MVP takes 4-6 weeks. A full-featured platform with admin dashboards, payments, and AI integration typically runs 8-16 weeks."}},
+      {"@type": "Question", "name": "What's your pricing model?", "acceptedAnswer": {"@type": "Answer", "text": "We price by project scope with clear phases and deliverables — not by the hour. Each project begins with a free discovery call and a written estimate."}},
+      {"@type": "Question", "name": "Do you work with startups or established companies?", "acceptedAnswer": {"@type": "Answer", "text": "Both. For startups, we focus on lean MVPs that validate fast. For established companies, we build enterprise-grade platforms."}},
+      {"@type": "Question", "name": "Can you integrate AI into our existing product?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We integrate OpenAI, Anthropic (Claude), Groq, and local models depending on your cost, latency, and privacy requirements."}},
+      {"@type": "Question", "name": "What payment gateways can you integrate?", "acceptedAnswer": {"@type": "Answer", "text": "Stripe (global), Azul / Banco Popular (DR local), PayPal, and others. Local gateway support is a capability most offshore agencies lack."}},
+      {"@type": "Question", "name": "Do you handle both design and development?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We own the full product lifecycle: UI/UX design, development, testing, deployment, and monitoring."}},
+      {"@type": "Question", "name": "What happens after launch?", "acceptedAnswer": {"@type": "Answer", "text": "We offer ongoing retainer engagements — bug fixes, performance monitoring, feature additions, and infrastructure management."}},
+      {"@type": "Question", "name": "Do you build mobile apps?", "acceptedAnswer": {"@type": "Answer", "text": "We specialize in Progressive Web Apps (PWAs) that install on mobile devices, work offline, and feel native — at a fraction of native app cost."}}
+    ]
+  }
+  </script>
 </head>
 <body>
   <!-- Shooting Stars Canvas -->
@@ -696,35 +759,49 @@
     <div class="container footer__inner">
       <div class="footer__top">
         <div class="footer__brand">
-          <img src="/images/logo.png" alt="Exxede.dev" class="footer__logo" />
-          <p>Full-stack development from Punta Cana to the world.<br/>AI-powered. Modern. Built to scale.</p>
+          <img src="/images/logo.png" alt="Exxede.dev — Web App Development Studio, Punta Cana DR" class="footer__logo" />
+          <p data-i18n="footer.tagline">Full-stack development from Punta Cana to the world.<br/>AI-powered. Modern. Built to scale.</p>
         </div>
         <div class="footer__cols">
           <div class="footer__col">
-            <h5>Services</h5>
-            <a href="#services">Web Applications</a>
-            <a href="#services">Mobile PWAs</a>
-            <a href="#services">API & Backend</a>
-            <a href="#services">AI Integration</a>
+            <h5 data-i18n="footer.services">Services</h5>
+            <a href="#services" data-i18n="footer.svc.web">Web Applications</a>
+            <a href="#services" data-i18n="footer.svc.pwa">Mobile PWAs</a>
+            <a href="#services" data-i18n="footer.svc.api">API & Backend</a>
+            <a href="#services" data-i18n="footer.svc.ai">AI Integration</a>
+            <a href="#services" data-i18n="footer.svc.ecom">E-Commerce</a>
+            <a href="#services" data-i18n="footer.svc.devops">DevOps</a>
           </div>
           <div class="footer__col">
-            <h5>Company</h5>
-            <a href="#about">About</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#process">Process</a>
-            <a href="#faq">FAQ</a>
+            <h5 data-i18n="footer.company">Company</h5>
+            <a href="#about" data-i18n="footer.co.about">About Us</a>
+            <a href="#portfolio" data-i18n="footer.co.portfolio">Portfolio</a>
+            <a href="#process" data-i18n="footer.co.process">Our Process</a>
+            <a href="#tech" data-i18n="footer.co.tech">Tech Stack</a>
+            <a href="#caribbean" data-i18n="footer.co.caribbean">Why Punta Cana</a>
+            <a href="#faq" data-i18n="footer.co.faq">FAQ</a>
           </div>
           <div class="footer__col">
-            <h5>Connect</h5>
-            <a href="mailto:godrulla@gmail.com">Email Us</a>
-            <a href="tel:+18095169523">Call Us</a>
-            <a href="#contact">Contact Form</a>
+            <h5 data-i18n="footer.connect">Connect</h5>
+            <a href="mailto:godrulla@gmail.com" data-i18n="footer.cx.email">Email Us</a>
+            <a href="tel:+18095169523" data-i18n="footer.cx.call">Call Us</a>
+            <a href="#contact" data-i18n="footer.cx.form">Contact Form</a>
+          </div>
+          <div class="footer__col">
+            <h5 data-i18n="footer.legal">Legal</h5>
+            <a href="#" data-i18n="footer.lg.privacy">Privacy Policy</a>
+            <a href="#" data-i18n="footer.lg.terms">Terms of Service</a>
+            <a href="#" data-i18n="footer.lg.cookies">Cookie Policy</a>
           </div>
         </div>
       </div>
       <div class="footer__bottom">
-        <p>&copy; 2024 Exxede.dev. All Rights Reserved.</p>
-        <p>Part of the <strong>Exxede</strong> family — <a href="#">Exxede Investments</a> &middot; <a href="#">ReppingDR</a> &middot; <a href="#">Prolici</a></p>
+        <p data-i18n="footer.copyright">&copy; 2024 Exxede.dev. All Rights Reserved.</p>
+        <p class="footer__family" data-i18n="footer.family">Part of the <strong>Exxede</strong> family — <a href="https://exxede-28e8f.web.app/">Exxede Investments</a> &middot; <a href="https://reppingdr.com">ReppingDR</a> &middot; <a href="https://prolici.web.app">Prolici</a></p>
+        <p class="footer__location">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-i18n="footer.location">Punta Cana, Dominican Republic</span>
+        </p>
       </div>
     </div>
   </footer>
